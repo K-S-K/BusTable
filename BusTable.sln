@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusTable.Service", "BusTabl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusTable.Core", "BusTable.Core\BusTable.Core.csproj", "{28107F9F-ADF1-4821-919C-8C621AD23F74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusTable.Test", "BusTable.Test\BusTable.Test.csproj", "{B64275D8-7380-4509-B8AF-D78AD8FA03CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{28107F9F-ADF1-4821-919C-8C621AD23F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28107F9F-ADF1-4821-919C-8C621AD23F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28107F9F-ADF1-4821-919C-8C621AD23F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
