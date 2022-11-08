@@ -1,5 +1,5 @@
-﻿using BusTable.Core.Common;
-using BusTable.Core.Dto;
+﻿using BusTable.Core.Dto;
+using BusTable.Core.Common;
 
 namespace BusTable.Service.Services
 {

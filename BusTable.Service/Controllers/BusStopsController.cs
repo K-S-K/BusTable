@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using BusTable.Service.Services;
 using BusTable.Core.Common;
 using BusTable.Core.Models;
+using BusTable.Service.Services;
 
 namespace BusTable.Service.Controllers
 {
