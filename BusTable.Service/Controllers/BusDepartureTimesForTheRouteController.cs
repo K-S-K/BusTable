@@ -8,13 +8,13 @@ namespace BusTable.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BusDepartureTimesForTheLineController : ControllerBase
+    public class BusDepartureTimesForTheRouteController : ControllerBase
     {
-        private readonly ILogger<BusDepartureTimesForTheLineController> _logger;
+        private readonly ILogger<BusDepartureTimesForTheRouteController> _logger;
         private readonly DataTransferProviderService _dataTransferProviderService;
 
-        public BusDepartureTimesForTheLineController(
-            ILogger<BusDepartureTimesForTheLineController> logger,
+        public BusDepartureTimesForTheRouteController(
+            ILogger<BusDepartureTimesForTheRouteController> logger,
             DataTransferProviderService dataTransferProviderService)
         {
             _logger = logger;
@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForThLine(string language = "ANY", int lineId = 0)
+        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheRoute(string language = "ANY", int lineId = 0)
         {
             /*
             // TODO: It must be in the conveyer
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
 
 
             BusDepartureTimeData? data;
-            try { data = _dataTransferProviderService.GetBusDepartureTimesForThLine(language, lineId); }
+            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheRoute(language, lineId); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

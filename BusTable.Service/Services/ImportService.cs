@@ -54,7 +54,7 @@ namespace BusTable.Service.Services
 
             foreach (var fileName in fileNames)
             {
-                StopData data = LoadPointData(fileName);
+                StopData data = LoadRouteSchedule(fileName);
 
                 if (ix.Contains(data.RouteId))
                 {
@@ -65,7 +65,7 @@ namespace BusTable.Service.Services
             return points;
         }
 
-        public StopData LoadPointData(string fileName)
+        public StopData LoadRouteSchedule(string fileName)
         {
             RouteSchedule schedule = RouteSchedule.Load(fileName);
 
@@ -81,27 +81,23 @@ namespace BusTable.Service.Services
                 {
                     throw new Exception($"The {nameof(RouteStop)} has not {nameof(input.StopId)} value: {input}");
                 }
-                if (!_stopDataService.TryGetById(input.StopId, out StopInfo? stopItem))
+                if (!_stopDataService.TryGetById(input.StopId, out StopHeader? stopHeader))
                 {
                     _stopDataService.AddStop(input);
-
-                    if (!_stopDataService.TryGetById(input.StopId, out stopItem))
-                    {
-                        throw new Exception($"The {nameof(StopService)} does not contain stop[{input.StopId}] value for {input}");
-                    }
                 }
 
-                if (stopItem == null)
+                if (stopHeader == null)
                 {
                     continue;
                 }
 
                 data.Items.Add(new()
                 {
-                    Id = stopItem.Id,
-                    Lon = stopItem.Lon,
-                    Lat = stopItem.Lat,
-                    Name = stopItem.Name,
+                    Id = stopHeader.Id,
+                    Lon = stopHeader.Lon,
+                    Lat = stopHeader.Lat,
+                    Name = stopHeader.Name,
+                    ArriveTimes = input.ArriveTimes.Select(x => new BusDepartureTimeItem() { Time = x }).ToList(),
                 });
             }
             return data;

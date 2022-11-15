@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<StopInfo>> GetStops(string language= "ANY", double lat = 0.0, double lon = 0.0)
+        public ActionResult<IEnumerable<StopHeader>> GetStops(string language = "ANY", double lat = 0.0, double lon = 0.0)
         {
             /*
             // TODO: It must be in the conveyer
@@ -33,7 +33,7 @@ namespace BusTable.Service.Controllers
             */
 
 
-            IEnumerable<StopInfo>? data;
+            IEnumerable<StopHeader>? data;
             try { data = _stopDataService.GetStops(language, lat, lon); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }

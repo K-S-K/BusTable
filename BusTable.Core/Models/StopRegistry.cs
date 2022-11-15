@@ -4,11 +4,11 @@ namespace BusTable.Core.Models
 {
     public class StopRegistry
     {
-        private readonly SortedDictionary<int, StopInfo> _ixCode = new();
+        private readonly SortedDictionary<int, StopHeader> _ixCode = new();
 
-        public List<StopInfo> Stops { get; set; } = new();
+        public List<StopHeader> Stops { get; set; } = new();
 
-        public bool TryGetById(int code, out StopInfo? item) => _ixCode.TryGetValue(code, out item);
+        public bool TryGetById(int code, out StopHeader? item) => _ixCode.TryGetValue(code, out item);
 
         public void Load(string fileName)
         {
@@ -29,7 +29,7 @@ namespace BusTable.Core.Models
                     continue;
                 }
 
-                StopInfo stopInfo = new()
+                StopHeader stopHeader = new()
                 {
                     Id = item.Code,
                     Lat = item.Lat,
@@ -37,7 +37,7 @@ namespace BusTable.Core.Models
                     Name = item.Name,
                 };
 
-                _ixCode.Add(stopInfo.Id, stopInfo);
+                _ixCode.Add(stopHeader.Id, stopHeader);
             }
 
             Stops = _ixCode.Values.ToList();
@@ -50,7 +50,7 @@ namespace BusTable.Core.Models
                 throw new Exception($"{nameof(StopRegistry)} already contains stop [{item.StopId}]: can't merge {item} to {_ixCode[item.StopId]}");
             }
 
-            StopInfo stopInfo = new()
+            StopHeader stopHeader = new()
             {
                 Id = item.StopId,
                 Lon = item.Lon,
@@ -58,8 +58,8 @@ namespace BusTable.Core.Models
                 Name = item.Name ?? string.Empty,
             };
 
-            _ixCode.Add(stopInfo.Id, stopInfo);
-            Stops.Add(stopInfo);
+            _ixCode.Add(stopHeader.Id, stopHeader);
+            Stops.Add(stopHeader);
         }
 
         public override string ToString() => $"Count: {Stops.Count}";

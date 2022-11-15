@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForThePoint(string language = "ANY", int stopId = 0)
+        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForThePoint(string language = "ANY", int routeId = 531, int stopId = 1439)
         {
             /*
             // TODO: It must be in the conveyer
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
 
 
             BusDepartureTimeData? data;
-            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheStop(language, stopId); }
+            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheStop(language, routeId, stopId); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

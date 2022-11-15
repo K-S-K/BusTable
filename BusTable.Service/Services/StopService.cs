@@ -16,9 +16,9 @@ namespace BusTable.Service.Services
             _stopRegistry.Load(fileName);
         }
 
-        public bool TryGetById(int code, out StopInfo? item) => _stopRegistry.TryGetById(code, out item);
+        public bool TryGetById(int code, out StopHeader? item) => _stopRegistry.TryGetById(code, out item);
 
-        public IEnumerable<StopInfo> GetStops(string language, double lat, double lon)
+        public IEnumerable<StopHeader> GetStops(string language, double lat, double lon)
         {
             return _stopRegistry.Stops;
         }

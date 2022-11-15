@@ -1,12 +1,10 @@
-﻿namespace BusTable.Core.Models
-{
-    public class StopInfo
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public double Lon { get; set; }
-        public double Lat { get; set; }
+﻿using System.Text.Json.Serialization;
 
-        public override string ToString() => $"[{Id}] \"{Name}\"";
+namespace BusTable.Core.Models
+{
+    public class StopInfo : StopHeader
+    {
+        [JsonIgnore]
+        public List<BusDepartureTimeItem> ArriveTimes { get; set; } = new();
     }
 }

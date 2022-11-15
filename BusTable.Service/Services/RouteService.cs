@@ -11,7 +11,7 @@ namespace BusTable.Service.Services
         private readonly Dictionary<int, StopData> pointData = new();
         private BusRouteData routeData;
 
-        public StopData? GetRoutePoints(string language, int routeId, int cityId = 0)
+        public StopData? GetRouteStops(string language, int routeId, int cityId = 0)
         {
             return pointData.TryGetValue(routeId, out var data) ? data : null;
         }

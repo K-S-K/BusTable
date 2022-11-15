@@ -1,7 +1,12 @@
-﻿namespace BusTable.Core.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BusTable.Core.Models
 {
     public class BusDepartureTimeItem
     {
-        public TimeSpan Departure { get; set; }
+        [JsonIgnore]
+        public TimeSpan Time { get; set; }
+
+        public string Departure => Time.ToString("hh\\:mm");
     }
 }

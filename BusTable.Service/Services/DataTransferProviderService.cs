@@ -1,5 +1,6 @@
 ﻿using BusTable.Core.Dto;
 using BusTable.Core.Common;
+using BusTable.Core.Models;
 
 namespace BusTable.Service.Services
 {
@@ -9,7 +10,7 @@ namespace BusTable.Service.Services
         private readonly StopService _stopDataService;
         private readonly RouteService _routeService;
 
-        public BusDepartureTimeData GetBusDepartureTimesForThLine(string language, int lineId)
+        public BusDepartureTimeData GetBusDepartureTimesForTheRoute(string language, int routeId)
         {
 
             try
@@ -26,15 +27,15 @@ namespace BusTable.Service.Services
 
             BusDepartureTimeData data = new();
             data.StopName = "Abashidze";
-            data.Times.Add(new() { Departure = new TimeSpan(8, 32, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 46, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 58, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 10, 0) });
+            data.Times.Add(new() { Time = new TimeSpan(8, 32, 0) });
+            data.Times.Add(new() { Time = new TimeSpan(8, 46, 0) });
+            data.Times.Add(new() { Time = new TimeSpan(8, 58, 0) });
+            data.Times.Add(new() { Time = new TimeSpan(9, 10, 0) });
 
             return data;
         }
 
-        public BusDepartureTimeData GetBusDepartureTimesForTheStop(string language, int stopId)
+        public BusDepartureTimeData? GetBusDepartureTimesForTheStop(string language, int routeId, int stopId)
         {
             try
             {
@@ -45,37 +46,30 @@ namespace BusTable.Service.Services
                 throw new BadRequestException(ex.Message);
             }
 
-            // TODO: It must be from the Data Layer
-            // TODO: It must be from the Depency Injection
+            StopData? stops = _routeService.GetRouteStops(language, routeId);
+            if (stops == null)
+            {
+                return null;
+            }
+
+            StopInfo? si = stops.Items.Where(x => x.Id == stopId).FirstOrDefault();
+            if (si == null)
+            {
+                return null;
+            }
+
             BusDepartureTimeData data = new()
             {
-                Language = language,
-                StopId = stopId, // 20237
-                StopName = "Opposite to Zakaria Paliashvili Street #33a"
-                // Напротив улицы Закария Палиашвили №33а 
+                Language = stops.Language,
+                StopId = stops.RouteId,
+                StopName = si.Name,
+                Times = si.ArriveTimes,
             };
-            data.Times.Add(new() { Departure = new TimeSpan(7, 14, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(7, 34, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(7, 54, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 10, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 22, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 34, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 46, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(8, 58, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 10, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 22, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 34, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 46, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(9, 58, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(10, 11, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(10, 26, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(10, 41, 0) });
-            data.Times.Add(new() { Departure = new TimeSpan(10, 56, 0) });
 
             return data;
         }
 
-        public StopData? GetRoutePoints(string language, int routeId, int cityId = 0)
+        public StopData? GetRouteStops(string language, int routeId, int cityId = 0)
         {
             try
             {
@@ -86,7 +80,7 @@ namespace BusTable.Service.Services
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? data = _routeService.GetRoutePoints(language, routeId, cityId);
+            StopData? data = _routeService.GetRouteStops(language, routeId, cityId);
 
             return data;
         }

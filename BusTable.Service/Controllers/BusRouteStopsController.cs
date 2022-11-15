@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
             */
 
             StopData? data;
-            try { data = _dataTransferProviderService.GetRoutePoints(language, routeId, cityId); }
+            try { data = _dataTransferProviderService.GetRouteStops(language, routeId, cityId); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 
