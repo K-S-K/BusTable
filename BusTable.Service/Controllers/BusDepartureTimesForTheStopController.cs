@@ -22,10 +22,10 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForThePoint(string language = "ANY", int routeId = 531, int stopId = 1439)
+        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheStop(string language = "ANY", int routeId = 531, int stopId = 1439)
         {
             /*
-            // TODO: It must be in the conveyer
+            // TODO: It must be in the Middleware
             if (!User.Identity.IsAuthenticated)
             {
                 return Forbidden();

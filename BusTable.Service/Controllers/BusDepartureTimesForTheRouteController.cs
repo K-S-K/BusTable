@@ -25,7 +25,7 @@ namespace BusTable.Service.Controllers
         public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheRoute(string language = "ANY", int lineId = 0)
         {
             /*
-            // TODO: It must be in the conveyer
+            // TODO: It must be in the Middleware
             if (!User.Identity.IsAuthenticated)
             {
                 return Forbidden();

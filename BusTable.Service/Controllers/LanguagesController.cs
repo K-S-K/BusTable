@@ -18,7 +18,7 @@ namespace BusTable.Service.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            // TODO: It must be from the Data Layer
+            // TODO: It must be from the Depency Injection
             return new LanguageData().Languages;
         }
     }

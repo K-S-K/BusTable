@@ -25,7 +25,7 @@ namespace BusTable.Service.Controllers
         public ActionResult<BusRouteData> GetRoutes(string language = "ANY", int cityId = 0)
         {
             /*
-            // TODO: It must be in the conveyer
+            // TODO: It must be in the Middleware
             if (!User.Identity.IsAuthenticated)
             {
                 return Forbidden();

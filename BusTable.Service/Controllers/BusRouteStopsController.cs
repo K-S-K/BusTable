@@ -23,10 +23,10 @@ namespace BusTable.Service.Controllers
 
 
         [HttpGet]
-        public ActionResult<StopData> GetRoutePoints(string language = "ANY", int routeId = 531, int cityId = 0)
+        public ActionResult<StopData> GetRouteStops(string language = "ANY", int routeId = 531, int cityId = 0)
         {
             /*
-            // TODO: It must be in the conveyer
+            // TODO: It must be in the Middleware
             if (!User.Identity.IsAuthenticated)
             {
                 return Forbidden();

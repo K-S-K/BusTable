@@ -38,18 +38,18 @@ namespace BusTable.Service.Services
                 {
                     Id = routeIn.RouteNumber,
                     Name = routeIn.LongName,
-                    Point1 = routeIn.StopA,
-                    Point2 = routeIn.StopB,
+                    Stop1 = routeIn.StopA,
+                    Stop2 = routeIn.StopB,
                 });
             }
 
             return data;
         }
 
-        public Dictionary<int, StopData> LoadPointData(IEnumerable<int> routeIds, string directory)
+        public Dictionary<int, StopData> LoadStopData(IEnumerable<int> routeIds, string directory)
         {
             var ix = routeIds.Distinct().ToHashSet();
-            var points = new Dictionary<int, StopData>();
+            var stops = new Dictionary<int, StopData>();
             var fileNames = Directory.EnumerateFiles(directory, "*f1.xml");
 
             foreach (var fileName in fileNames)
@@ -58,11 +58,11 @@ namespace BusTable.Service.Services
 
                 if (ix.Contains(data.RouteId))
                 {
-                    points[data.RouteId] = data;
+                    stops[data.RouteId] = data;
                 }
             }
 
-            return points;
+            return stops;
         }
 
         public StopData LoadRouteSchedule(string fileName)

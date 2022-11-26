@@ -4,13 +4,13 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string Point1 { get; set; } = null!;
-        public string Point2 { get; set; } = null!;
-        public bool Circle => Point1 == Point2;
+        public string Stop1 { get; set; } = null!;
+        public string Stop2 { get; set; } = null!;
+        public bool Circle => Stop1 == Stop2;
 
         public override string ToString()
         {
-            return $"[{Id}]: \"{Point1}\" - \"{Point2}\", \"{Name}\"";
+            return $"[{Id}]: \"{Stop1}\" - \"{Stop2}\", \"{Name}\"";
         }
     }
 }

@@ -25,7 +25,7 @@ namespace BusTable.Service.Controllers
         public ActionResult<IEnumerable<StopHeader>> GetStops(string language = "ANY", double lat = 0.0, double lon = 0.0)
         {
             /*
-            // TODO: It must be in the conveyer
+            // TODO: It must be in the Middleware
             if (!User.Identity.IsAuthenticated)
             {
                 return Forbidden();
