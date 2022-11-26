@@ -31,7 +31,7 @@ namespace BusTable.Service.Services
             _importService = importService;
 
             routeData = _importService.LoadRouteData(@"C:\Polygon\BusTable\SourceData\routes.xml");
-            stopData = _importService.LoadStopData(routeData.Items.Keys, @"C:\Polygon\BusTable\SourceData\");
+            stopData = _importService.LoadStopData(routeData.Items.Keys, @"C:\Polygon\BusTable\SourceData\", _stopDataService);
 
             HashSet<string> routeIds = stopData.Keys.ToHashSet();
             HashSet<string> routeDel = new();

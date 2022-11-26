@@ -5,15 +5,15 @@ namespace BusTable.Service.Services
 {
     public class StopService
     {
+        private readonly ImportService _importService;
         private readonly StopRegistry _stopRegistry;
 
-
-        public StopService()
+        public StopService(ImportService importService)
         {
-            _stopRegistry = new();
+            _importService = importService;
 
             var fileName = @"C:\Polygon\BusTable\SourceData\stops-k.json";
-            _stopRegistry.Load(fileName);
+            _stopRegistry = _importService.LoadStopRegistry(fileName);
         }
 
         public bool TryGetById(int code, out StopHeader? item) => _stopRegistry.TryGetById(code, out item);
