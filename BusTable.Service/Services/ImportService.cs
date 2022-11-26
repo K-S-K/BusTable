@@ -24,7 +24,7 @@ namespace BusTable.Service.Services
 
             foreach (var routeIn in routeList.Routes.Values.ToList())
             {
-                if (routeIn.RouteNumber == 0)
+                if (routeIn.RouteNumber == "0")
                 {
                     continue;
                 }
@@ -36,7 +36,7 @@ namespace BusTable.Service.Services
 
                 data.Items.Add(routeIn.RouteNumber, new()
                 {
-                    Id = routeIn.RouteNumber,
+                    Number = routeIn.RouteNumber,
                     Name = routeIn.LongName,
                     Stop1 = routeIn.StopA,
                     Stop2 = routeIn.StopB,
@@ -46,19 +46,19 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<int, StopData> LoadStopData(IEnumerable<int> routeIds, string directory)
+        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, string directory)
         {
             var ix = routeIds.Distinct().ToHashSet();
-            var stops = new Dictionary<int, StopData>();
+            var stops = new Dictionary<string, StopData>();
             var fileNames = Directory.EnumerateFiles(directory, "*f1.xml");
 
             foreach (var fileName in fileNames)
             {
                 StopData data = LoadRouteSchedule(fileName);
 
-                if (ix.Contains(data.RouteId))
+                if (ix.Contains(data.RouteNumber))
                 {
-                    stops[data.RouteId] = data;
+                    stops[data.RouteNumber] = data;
                 }
             }
 
@@ -72,7 +72,7 @@ namespace BusTable.Service.Services
             StopData data = new()
             {
                 Language = "ANY",
-                RouteId = schedule.RouteNumber,
+                RouteNumber = schedule.RouteNumber,
             };
 
             foreach (RouteStop input in schedule.RouteStops.Values.ToList())

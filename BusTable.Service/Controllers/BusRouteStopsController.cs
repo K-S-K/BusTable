@@ -23,7 +23,7 @@ namespace BusTable.Service.Controllers
 
 
         [HttpGet]
-        public ActionResult<StopData> GetRouteStops(string language = "ANY", int routeId = 531, int cityId = 0)
+        public ActionResult<StopData> GetRouteStops(string language = "ANY", string routeNumber = "531", int cityId = 0)
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
             */
 
             StopData? data;
-            try { data = _dataTransferProviderService.GetRouteStops(language, routeId, cityId); }
+            try { data = _dataTransferProviderService.GetRouteStops(language, routeNumber, cityId); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

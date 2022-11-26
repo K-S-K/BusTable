@@ -4,7 +4,7 @@ namespace BusTable.Core.Import
 {
     public class RouteSchedule
     {
-        public int RouteNumber { get; set; }
+        public string RouteNumber { get; set; } = null!;
         public bool Forward { get; set; }
         public Dictionary<int, RouteStop> RouteStops { get; set; } = new();
 
@@ -20,8 +20,7 @@ namespace BusTable.Core.Import
             }
             set
             {
-                string routeNumberStr = value?.Element(nameof(RouteNumber))?.Value ?? "0";
-                RouteNumber = int.Parse(routeNumberStr);
+                RouteNumber = value?.Element(nameof(RouteNumber))?.Value ?? "0";
                 Forward = bool.Parse(value?.Element(nameof(Forward))?.Value ?? false.ToString());
                 var rawStops = value?.Element("WeekdaySchedules")
                     ?.Elements("Stops").Select(x => new RouteStop(x));

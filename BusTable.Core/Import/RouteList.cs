@@ -4,7 +4,7 @@ namespace BusTable.Core.Import
 {
     public class RouteList
     {
-        public Dictionary<int, RouteItem> Routes { get; set; } = new();
+        public Dictionary<string, RouteItem> Routes { get; set; } = new();
 
 
         public XElement XContent
@@ -24,7 +24,7 @@ namespace BusTable.Core.Import
                 {
                     foreach (var route in rawRoutes)
                     {
-                        if (route.RouteNumber != 0)
+                        if (route.RouteNumber != "0")
                         {
                             Routes.Add(route.RouteNumber, route);
                         }

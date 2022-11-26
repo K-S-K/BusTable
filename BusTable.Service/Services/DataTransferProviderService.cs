@@ -10,7 +10,7 @@ namespace BusTable.Service.Services
         private readonly StopService _stopDataService;
         private readonly RouteService _routeService;
 
-        public BusDepartureTimeData GetBusDepartureTimesForTheRoute(string language, int routeId)
+        public BusDepartureTimeData GetBusDepartureTimesForTheRoute(string language, string routeNumber)
         {
 
             try
@@ -35,7 +35,7 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public BusDepartureTimeData? GetBusDepartureTimesForTheStop(string language, int routeId, int stopId)
+        public BusDepartureTimeData? GetBusDepartureTimesForTheStop(string language, string routeNumber, int stopId)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace BusTable.Service.Services
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? stops = _routeService.GetRouteStops(language, routeId);
+            StopData? stops = _routeService.GetRouteStops(language, routeNumber);
             if (stops == null)
             {
                 return null;
@@ -61,7 +61,7 @@ namespace BusTable.Service.Services
             BusDepartureTimeData data = new()
             {
                 Language = stops.Language,
-                StopId = stops.RouteId,
+                StopId = stopId,
                 StopName = si.Name,
                 Times = si.ArriveTimes,
             };
@@ -69,7 +69,7 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public StopData? GetRouteStops(string language, int routeId, int cityId = 0)
+        public StopData? GetRouteStops(string language, string routeId, int cityId = 0)
         {
             try
             {

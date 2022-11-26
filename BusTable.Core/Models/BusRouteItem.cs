@@ -2,7 +2,7 @@
 {
     public class BusRouteItem
     {
-        public int Id { get; set; }
+        public string Number { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string Stop1 { get; set; } = null!;
         public string Stop2 { get; set; } = null!;
@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            return $"[{Id}]: \"{Stop1}\" - \"{Stop2}\", \"{Name}\"";
+            return $"[{nameof(Number)}]: \"{Stop1}\" - \"{Stop2}\", \"{Name}\"";
         }
     }
 }
