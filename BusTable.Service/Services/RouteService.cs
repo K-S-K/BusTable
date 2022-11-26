@@ -8,12 +8,12 @@ namespace BusTable.Service.Services
         private readonly StopService _stopDataService;
         private readonly ImportService _importService;
 
-        private readonly Dictionary<int, StopData> stopData = new();
+        private readonly Dictionary<string, StopData> stopData = new();
         private BusRouteData routeData;
 
-        public StopData? GetRouteStops(string language, int routeId, int cityId = 0)
+        public StopData? GetRouteStops(string language, string routeNumber, int cityId = 0)
         {
-            return stopData.TryGetValue(routeId, out var data) ? data : null;
+            return stopData.TryGetValue(routeNumber, out var data) ? data : null;
         }
 
         public BusRouteData GetRoutes(string language, int cityId = 0)
@@ -33,10 +33,10 @@ namespace BusTable.Service.Services
             routeData = _importService.LoadRouteData(@"C:\Polygon\BusTable\SourceData\routes.xml");
             stopData = _importService.LoadStopData(routeData.Items.Keys, @"C:\Polygon\BusTable\SourceData\");
 
-            HashSet<int> routeIds = stopData.Keys.ToHashSet();
-            HashSet<int> routeDel = new();
+            HashSet<string> routeIds = stopData.Keys.ToHashSet();
+            HashSet<string> routeDel = new();
 
-            foreach (int id in routeData.Items.Keys)
+            foreach (var id in routeData.Items.Keys)
             {
                 if (!routeIds.Contains(id))
                 {

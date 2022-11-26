@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheRoute(string language = "ANY", int lineId = 0)
+        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheRoute(string language = "ANY", string routeNumber = "531")
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
 
 
             BusDepartureTimeData? data;
-            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheRoute(language, lineId); }
+            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheRoute(language, routeNumber); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 
