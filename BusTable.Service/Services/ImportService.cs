@@ -6,13 +6,6 @@ namespace BusTable.Service.Services
 {
     public class ImportService
     {
-        private readonly StopService _stopDataService;
-
-        public ImportService(StopService stopService)
-        {
-            _stopDataService = stopService;
-        }
-
         public BusRouteData LoadRouteData(string fileName)
         {
             RouteList routeList = RouteList.Load(fileName);
@@ -46,7 +39,7 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, string directory)
+        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, string directory, StopService stopDataService)
         {
             var ix = routeIds.Distinct().ToHashSet();
             var stops = new Dictionary<string, StopData>();
@@ -54,7 +47,7 @@ namespace BusTable.Service.Services
 
             foreach (var fileName in fileNames)
             {
-                StopData data = LoadRouteSchedule(fileName);
+                StopData data = LoadRouteSchedule(fileName, stopDataService);
 
                 if (ix.Contains(data.RouteNumber))
                 {
@@ -65,7 +58,7 @@ namespace BusTable.Service.Services
             return stops;
         }
 
-        public StopData LoadRouteSchedule(string fileName)
+        public StopData LoadRouteSchedule(string fileName, StopService stopDataService)
         {
             RouteSchedule schedule = RouteSchedule.Load(fileName);
 
@@ -81,9 +74,9 @@ namespace BusTable.Service.Services
                 {
                     throw new Exception($"The {nameof(RouteStop)} has not {nameof(input.StopId)} value: {input}");
                 }
-                if (!_stopDataService.TryGetById(input.StopId, out StopHeader? stopHeader))
+                if (!stopDataService.TryGetById(input.StopId, out StopHeader? stopHeader))
                 {
-                    _stopDataService.AddStop(input);
+                    stopDataService.AddStop(input);
                 }
 
                 if (stopHeader == null)
@@ -100,6 +93,13 @@ namespace BusTable.Service.Services
                     ArriveTimes = input.ArriveTimes.Select(x => new BusDepartureTimeItem() { Time = x }).ToList(),
                 });
             }
+            return data;
+        }
+
+        public StopRegistry LoadStopRegistry(string fileName)
+        {
+            StopRegistry data = new();
+            data.Load(fileName);
             return data;
         }
     }
