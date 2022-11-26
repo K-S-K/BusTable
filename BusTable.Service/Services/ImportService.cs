@@ -1,13 +1,23 @@
 ﻿using BusTable.Core.Dto;
 using BusTable.Core.Import;
 using BusTable.Core.Models;
+using BusTable.Service.Settings;
 
 namespace BusTable.Service.Services
 {
     public class ImportService
     {
-        public BusRouteData LoadRouteData(string fileName)
+        private ImportSourceSettings _settings;
+
+        public ImportService(ImportSourceSettings settings)
         {
+            _settings = settings;
+        }
+
+        public BusRouteData LoadRouteData()
+        {
+            string fileName = Path.Combine(_settings.Directory, _settings.RouteListFileName);
+
             RouteList routeList = RouteList.Load(fileName);
 
             BusRouteData data = new()
@@ -39,11 +49,11 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, string directory, StopService stopDataService)
+        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
         {
             var ix = routeIds.Distinct().ToHashSet();
             var stops = new Dictionary<string, StopData>();
-            var fileNames = Directory.EnumerateFiles(directory, "*f1.xml");
+            var fileNames = Directory.EnumerateFiles(_settings.Directory, "*f1.xml");
 
             foreach (var fileName in fileNames)
             {
@@ -96,8 +106,10 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public StopRegistry LoadStopRegistry(string fileName)
+        public StopRegistry LoadStopRegistry()
         {
+            string fileName = Path.Combine(_settings.Directory, _settings.StopListFileName);
+
             StopRegistry data = new();
             data.Load(fileName);
             return data;

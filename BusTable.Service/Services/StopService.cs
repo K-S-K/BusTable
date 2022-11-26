@@ -12,8 +12,7 @@ namespace BusTable.Service.Services
         {
             _importService = importService;
 
-            var fileName = @"C:\Polygon\BusTable\SourceData\stops-k.json";
-            _stopRegistry = _importService.LoadStopRegistry(fileName);
+            _stopRegistry = _importService.LoadStopRegistry();
         }
 
         public bool TryGetById(int code, out StopHeader? item) => _stopRegistry.TryGetById(code, out item);
