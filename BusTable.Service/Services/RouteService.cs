@@ -1,4 +1,5 @@
 ﻿using BusTable.Core.Dto;
+using BusTable.Core.Models;
 
 namespace BusTable.Service.Services
 {
@@ -9,16 +10,16 @@ namespace BusTable.Service.Services
         private readonly ImportService _importService;
 
         private readonly Dictionary<string, StopData> stopData = new();
-        private BusRouteData routeData;
+        private readonly RouteRegistry routeRegistry;
 
         public StopData? GetRouteStops(string language, string routeNumber, int cityId = 0)
         {
             return stopData.TryGetValue(routeNumber, out var data) ? data : null;
         }
 
-        public BusRouteData GetRoutes(string language, int cityId = 0)
+        public async Task<BusRouteData> GetRoutes(BusRoutesRequest request)
         {
-            return routeData;
+            return await routeRegistry.GetRoutes(request);
         }
 
         public RouteService(StopService stopDataService,
@@ -30,13 +31,13 @@ namespace BusTable.Service.Services
             _stopDataService = stopDataService;
             _importService = importService;
 
-            routeData = _importService.LoadRouteData();
-            stopData = _importService.LoadStopData(routeData.Items.Keys, _stopDataService);
+            routeRegistry = _importService.LoadRouteRegistry();
+            stopData = _importService.LoadStopData(routeRegistry.Items.Keys, _stopDataService);
 
             HashSet<string> routeIds = stopData.Keys.ToHashSet();
             HashSet<string> routeDel = new();
 
-            foreach (var id in routeData.Items.Keys)
+            foreach (var id in routeRegistry.Items.Keys)
             {
                 if (!routeIds.Contains(id))
                 {
@@ -44,7 +45,7 @@ namespace BusTable.Service.Services
                 }
             }
 
-            routeDel.ToList().ForEach(x => routeData.Items.Remove(x));
+            routeDel.ToList().ForEach(x => routeRegistry.Items.Remove(x));
         }
     }
 }
