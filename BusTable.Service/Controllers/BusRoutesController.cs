@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusRouteData> GetRoutes(string language = "ANY", int cityId = 0)
+        public async Task<ActionResult<BusRouteData>> GetRoutes([FromQuery] BusRoutesRequest request)
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
 
 
             BusRouteData? data;
-            try { data = _dataTransferProviderService.GetRoutes(language, cityId); }
+            try { data = await _dataTransferProviderService.GetRoutes(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

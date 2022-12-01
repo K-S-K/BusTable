@@ -14,13 +14,13 @@ namespace BusTable.Service.Services
             _settings = settings;
         }
 
-        public BusRouteData LoadRouteData()
+        public RouteRegistry LoadRouteRegistry()
         {
             string fileName = Path.Combine(_settings.Directory, _settings.RouteListFileName);
 
             RouteList routeList = RouteList.Load(fileName);
 
-            BusRouteData data = new()
+            RouteRegistry data = new()
             {
                 Language = "ANY"
             };

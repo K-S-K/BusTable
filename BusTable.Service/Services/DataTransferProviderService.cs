@@ -85,18 +85,18 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public BusRouteData GetRoutes(string language, int cityId = 0)
+        public async Task<BusRouteData> GetRoutes(BusRoutesRequest request)
         {
             try
             {
-                _languageValidationService.Validate(language);
+                _languageValidationService.Validate(request.Language);
             }
             catch (Exception ex)
             {
                 throw new BadRequestException(ex.Message);
             }
 
-            return _routeService.GetRoutes(language, cityId);
+            return await _routeService.GetRoutes(request);
         }
 
         public DataTransferProviderService(
