@@ -35,24 +35,24 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public BusDepartureTimeData? GetBusDepartureTimesForTheStop(string language, string routeNumber, int stopId)
+        public async Task<BusDepartureTimeData?> GetBusDepartureTimesForTheStop(BusDepartureTimesForTheStopRequest request)
         {
             try
             {
-                _languageValidationService.Validate(language);
+                _languageValidationService.Validate(request.Language);
             }
             catch (Exception ex)
             {
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? stops = _routeService.GetRouteStops(language, routeNumber);
+            StopData? stops = await _routeService.GetRouteStops(request);
             if (stops == null)
             {
                 return null;
             }
 
-            StopInfo? si = stops.Items.Where(x => x.Id == stopId).FirstOrDefault();
+            StopInfo? si = stops.Items.Where(x => x.Id == request.StopID).FirstOrDefault();
             if (si == null)
             {
                 return null;
@@ -61,7 +61,7 @@ namespace BusTable.Service.Services
             BusDepartureTimeData data = new()
             {
                 Language = stops.Language,
-                StopId = stopId,
+                StopId = request.StopID,
                 StopName = si.Name,
                 Times = si.ArriveTimes,
             };
@@ -69,18 +69,18 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public StopData? GetRouteStops(string language, string routeId, int cityId = 0)
+        public async Task<StopData?> GetRouteStops(BusRouteStopsRequest request)
         {
             try
             {
-                _languageValidationService.Validate(language);
+                _languageValidationService.Validate(request.Language);
             }
             catch (Exception ex)
             {
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? data = _routeService.GetRouteStops(language, routeId, cityId);
+            StopData? data = await _routeService.GetRouteStops(request);
 
             return data;
         }

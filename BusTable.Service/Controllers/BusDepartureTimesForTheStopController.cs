@@ -22,7 +22,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BusDepartureTimeData> GetBusDepartureTimesForTheStop(string language = "ANY", string routeNumber = "531", int stopId = 1439)
+        public async Task<ActionResult<BusDepartureTimeData>> GetBusDepartureTimesForTheStop([FromQuery] BusDepartureTimesForTheStopRequest request)
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
 
 
             BusDepartureTimeData? data;
-            try { data = _dataTransferProviderService.GetBusDepartureTimesForTheStop(language, routeNumber, stopId); }
+            try { data = await _dataTransferProviderService.GetBusDepartureTimesForTheStop(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

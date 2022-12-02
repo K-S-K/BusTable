@@ -12,9 +12,11 @@ namespace BusTable.Service.Services
         private readonly Dictionary<string, StopData> stopData = new();
         private readonly RouteRegistry routeRegistry;
 
-        public StopData? GetRouteStops(string language, string routeNumber, int cityId = 0)
+        public async Task<StopData?> GetRouteStops(IBusRouteStopsRequest request)
         {
-            return stopData.TryGetValue(routeNumber, out var data) ? data : null;
+            var result = stopData.TryGetValue(request.RouteNumber, out var data) ? data : null;
+
+            return (await Task.FromResult(result));
         }
 
         public async Task<BusRouteData> GetRoutes(BusRoutesRequest request)
