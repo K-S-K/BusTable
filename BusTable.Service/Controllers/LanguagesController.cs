@@ -5,6 +5,7 @@ using BusTable.Core.Dto;
 namespace BusTable.Service.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
     [Route("[controller]")]
     public class LanguagesController
     {

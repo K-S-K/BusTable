@@ -7,6 +7,7 @@ using BusTable.Service.Services;
 namespace BusTable.Service.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
     [Route("[controller]")]
     public class BusStopsController : Controller
     {
