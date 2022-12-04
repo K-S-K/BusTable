@@ -34,5 +34,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: website
-        path: BusTable/BusTable//website/**
+        path: BusTable/BusTable/website/**
         if-no-files-found: error
