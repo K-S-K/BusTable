@@ -35,7 +35,7 @@ namespace BusTable.Core.Models
             };
             foreach (var item in items)
             {
-                result.Items.Add(item.Number, item);
+                result.Items.Add(item);
             }
 
             return result;

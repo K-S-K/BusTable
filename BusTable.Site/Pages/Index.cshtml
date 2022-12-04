@@ -1,0 +1,125 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<ul id="routes-list"></ul>
+
+<table id="routes-table">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Bh</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+</table>
+
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movie)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+*@
+
+@section Scripts{
+    <script>
+        let url = "https://localhost:7212/BusRoutes";
+        let productsList = document.getElementById("routes-list");
+        let routesTable = document.getElementById("routes-table");
+
+        // async function fetchData() {
+        //     try {
+        //         const data = showProducts((await fetch(url)).json())
+        //     } catch (ex) {
+        //         console.error(ex);
+        //         alert(`Error!${ex.message}`);
+        //     }
+        // }
+        fetch(url)
+            .then(response => response.json())
+            // .then(data => showProductList(data))
+            .then(data => showProductTable(data))
+            .catch(ex => {
+                alert(`Error!${ex.message}`);
+                console.error(ex);
+            });
+
+        function showProductList(routes) {
+            routes.items.forEach(route => {
+                let li = document.createElement("li");
+                let text = `${route.number} ${route.circle ? "o" : "="} ${route.name})`;
+                li.appendChild(
+                    document.createTextNode(text));
+                productsList.appendChild(li);
+            });
+        }
+
+        function showProductTable(routes) {
+            let tb = document.createElement("tbody");
+            routes.items.forEach(route => {
+                let tr = document.createElement("tr");
+
+                let tdNum = document.createElement("td");
+                tdNum.appendChild(
+                    document.createTextNode(route.number));
+                tr.appendChild(tdNum);
+
+                let tdBhv = document.createElement("td");
+                tdBhv.appendChild(
+                    document.createTextNode(`${route.circle ? "o" : "="}`));
+                tr.appendChild(tdBhv);
+
+                let tdNam = document.createElement("td");
+                tdNam.appendChild(
+                    document.createTextNode(route.name));
+                tr.appendChild(tdNam);
+
+                tb.appendChild(tr);
+            });
+            routesTable.appendChild(tb);
+        }
+
+        // fetchData();
+    </script>
+}

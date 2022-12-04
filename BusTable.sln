@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusTable.Service", "BusTable.Service\BusTable.Service.csproj", "{F770BD31-7C12-48A5-91B3-0C90EE16AB5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusTable.Core", "BusTable.Core\BusTable.Core.csproj", "{28107F9F-ADF1-4821-919C-8C621AD23F74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusTable.Core", "BusTable.Core\BusTable.Core.csproj", "{28107F9F-ADF1-4821-919C-8C621AD23F74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusTable.Test", "BusTable.Test\BusTable.Test.csproj", "{B64275D8-7380-4509-B8AF-D78AD8FA03CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusTable.Test", "BusTable.Test\BusTable.Test.csproj", "{B64275D8-7380-4509-B8AF-D78AD8FA03CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusTable.Site", "BusTable.Site\BusTable.Site.csproj", "{4295845F-D590-4275-83D1-C945FBF3B6C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B64275D8-7380-4509-B8AF-D78AD8FA03CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4295845F-D590-4275-83D1-C945FBF3B6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4295845F-D590-4275-83D1-C945FBF3B6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4295845F-D590-4275-83D1-C945FBF3B6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4295845F-D590-4275-83D1-C945FBF3B6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
