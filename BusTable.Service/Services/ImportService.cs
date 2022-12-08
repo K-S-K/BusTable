@@ -5,7 +5,7 @@ using BusTable.Service.Settings;
 
 namespace BusTable.Service.Services
 {
-    public class ImportService
+    public class ImportService : IImportService
     {
         private ImportSourceSettings _settings;
 
@@ -72,6 +72,11 @@ namespace BusTable.Service.Services
         {
             RouteSchedule schedule = RouteSchedule.Load(fileName);
 
+            return ApplyRouteSchedule(stopDataService, schedule);
+        }
+
+        public static StopData ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
+        {
             StopData data = new()
             {
                 Language = "ANY",

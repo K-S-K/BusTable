@@ -22,4 +22,19 @@
     <ProjectReference Include="..\BusTable.Service\BusTable.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\Source.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Source.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Source.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Source.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

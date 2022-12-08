@@ -7,7 +7,7 @@ namespace BusTable.Service.Services
     {
         private readonly LanguageValidationService _languageValidationService;
         private readonly StopService _stopDataService;
-        private readonly ImportService _importService;
+        private readonly IImportService _importService;
 
         private readonly Dictionary<string, StopData> stopData = new();
         private readonly RouteRegistry routeRegistry;
@@ -26,7 +26,7 @@ namespace BusTable.Service.Services
 
         public RouteService(StopService stopDataService,
             LanguageValidationService languageValidationService,
-            ImportService importService
+            IImportService importService
             )
         {
             _languageValidationService = languageValidationService;
