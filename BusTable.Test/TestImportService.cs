@@ -38,15 +38,15 @@ namespace BusTable.Test
         {
             var stops = new Dictionary<string, StopData>();
 
-            AddRoute(XElement.Parse(Source.DataSchedule_304_f1));
-            AddRoute(XElement.Parse(Source.DataSchedule_310_f0));
-            AddRoute(XElement.Parse(Source.DataSchedule_310_f1));
-            AddRoute(XElement.Parse(Source.DataSchedule_383_f0));
-            AddRoute(XElement.Parse(Source.DataSchedule_383_f1));
-            AddRoute(XElement.Parse(Source.DataSchedule_387_f0));
-            AddRoute(XElement.Parse(Source.DataSchedule_387_f1));
-            AddRoute(XElement.Parse(Source.DataSchedule_531_f0));
-            AddRoute(XElement.Parse(Source.DataSchedule_531_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_304_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_310_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_310_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_383_f0));
+            AddRoute(XElement.Parse(Source.data_schedule_383_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_387_f0));
+            AddRoute(XElement.Parse(Source.data_schedule_387_f1));
+            AddRoute(XElement.Parse(Source.data_schedule_531_f0));
+            AddRoute(XElement.Parse(Source.data_schedule_531_f1));
 
             return stops;
 

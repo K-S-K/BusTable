@@ -92,9 +92,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:10,7:26,7:42,7:58,8:14,8:30,8:46,9:02,9:18,9:34,9:50,10:06,10:22,10:38,10:54,11:10,11:26,11:42,11:58,12:14,12:30,12:46,13:02,13:18,13:34,13:50,14:06,14:22,14:38,14:54,15:10,15:26,15:42,15:58,16:14,16:30,16:46,17:02,17:18,17:34,17:50,18:06,18:22,18:38,18:54,19:10,19:26,19:42, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_304_f1 {
+        internal static string data_schedule_304_f1 {
             get {
-                return ResourceManager.GetString("DataSchedule_304_f1", resourceCulture);
+                return ResourceManager.GetString("data_schedule_304_f1", resourceCulture);
             }
         }
         
@@ -108,9 +108,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:27,7:38,7:49,8:00,8:11,8:22,8:33,8:44,8:55,9:06,9:17,9:28,9:39,9:50,10:01,10:12,10:23,10:34,10:45,10:56,11:07,11:18,11:40,11:51,12:02,12:13,12:24,12:35,12:46,12:57,13:08,13:19,13:41,13:52,14:03,14:14,14:25,14:36,14:47,14:58,15:09,15:20,15:31,15:42,15:53,16:04,16:15,16:26,16 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_310_f0 {
+        internal static string data_schedule_310_f0 {
             get {
-                return ResourceManager.GetString("DataSchedule_310_f0", resourceCulture);
+                return ResourceManager.GetString("data_schedule_310_f0", resourceCulture);
             }
         }
         
@@ -124,9 +124,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;6:55,7:06,7:17,7:28,7:39,7:50,8:01,8:12,8:23,8:34,8:45,8:56,9:07,9:18,9:29,9:40,9:51,10:02,10:13,10:24,10:35,10:46,10:57,11:08,11:19,11:30,11:41,11:52,12:03,12:14,12:36,12:47,12:58,13:09,13:20,13:31,13:42,13:53,14:04,14:15,14:37,14:48,14:59,15:10,15:21,15:32,15:43,15:54,16:05, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_310_f1 {
+        internal static string data_schedule_310_f1 {
             get {
-                return ResourceManager.GetString("DataSchedule_310_f1", resourceCulture);
+                return ResourceManager.GetString("data_schedule_310_f1", resourceCulture);
             }
         }
         
@@ -140,9 +140,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:00,7:13,7:26,7:39,7:52,8:05,8:18,8:31,8:44,8:57,9:10,9:23,9:36,9:49,10:02,10:15,10:28,10:41,10:54,11:07,11:20,11:33,11:46,11:59,12:25,12:38,12:51,13:04,13:17,13:30,13:43,13:56,14:22,14:35,14:48,15:01,15:14,15:27,15:40,15:53,16:06,16:19,16:32,16:45,16:58,17:11,17:24,17:37,17 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_383_f0 {
+        internal static string data_schedule_383_f0 {
             get {
-                return ResourceManager.GetString("DataSchedule_383_f0", resourceCulture);
+                return ResourceManager.GetString("data_schedule_383_f0", resourceCulture);
             }
         }
         
@@ -156,9 +156,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:00,7:13,7:26,7:39,7:52,8:05,8:18,8:31,8:44,8:57,9:10,9:23,9:36,9:49,10:02,10:15,10:28,10:41,10:54,11:07,11:33,11:46,11:59,12:12,12:25,12:38,12:51,13:04,13:30,13:43,13:56,14:09,14:22,14:35,14:48,15:01,15:14,15:27,15:40,15:53,16:06,16:19,16:32,16:45,16:58,17:11,17:24,17:37,17: [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_383_f1 {
+        internal static string data_schedule_383_f1 {
             get {
-                return ResourceManager.GetString("DataSchedule_383_f1", resourceCulture);
+                return ResourceManager.GetString("data_schedule_383_f1", resourceCulture);
             }
         }
         
@@ -169,9 +169,9 @@ namespace BusTable.Test.Resources {
         ///    &lt;RouteNumber&gt;387&lt;/RouteNumber&gt;
         ///&lt;/Schedule&gt;.
         /// </summary>
-        internal static string DataSchedule_387_f0 {
+        internal static string data_schedule_387_f0 {
             get {
-                return ResourceManager.GetString("DataSchedule_387_f0", resourceCulture);
+                return ResourceManager.GetString("data_schedule_387_f0", resourceCulture);
             }
         }
         
@@ -185,9 +185,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:00,7:11,7:22,7:33,7:38,7:44,7:49,7:55,8:00,8:06,8:11,8:17,8:22,8:28,8:33,8:39,8:44,8:50,8:55,9:01,9:06,9:12,9:17,9:23,9:28,9:34,9:39,9:45,9:50,9:56,10:01,10:07,10:12,10:18,10:23,10:29,10:34,10:40,10:45,10:51,10:56,11:02,11:07,11:13,11:18,11:24,11:29,11:35,11:40,11:46,11:51,1 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_387_f1 {
+        internal static string data_schedule_387_f1 {
             get {
-                return ResourceManager.GetString("DataSchedule_387_f1", resourceCulture);
+                return ResourceManager.GetString("data_schedule_387_f1", resourceCulture);
             }
         }
         
@@ -201,9 +201,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:14,7:34,7:54,8:10,8:22,8:34,8:46,8:58,9:10,9:22,9:34,9:46,9:58,10:11,10:26,10:41,10:56,11:11,11:26,11:41,11:56,12:11,12:26,12:41,12:56,13:11,13:26,13:41,13:56,14:11,14:26,14:41,14:56,15:11,15:26,15:41,15:56,16:11,16:26,16:41,16:56,17:10,17:22,17:34,17:46,17:58,18:10,18:22,1 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_531_f0 {
+        internal static string data_schedule_531_f0 {
             get {
-                return ResourceManager.GetString("DataSchedule_531_f0", resourceCulture);
+                return ResourceManager.GetString("data_schedule_531_f0", resourceCulture);
             }
         }
         
@@ -217,9 +217,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;Stops&gt;
         ///            &lt;ArriveTimes&gt;7:00,7:20,7:40,8:00,8:12,8:24,8:36,8:48,9:00,9:12,9:24,9:36,9:48,10:00,10:15,10:30,10:45,11:00,11:15,11:30,11:45,12:00,12:15,12:30,12:45,13:00,13:15,13:30,13:45,14:00,14:15,14:30,14:45,15:00,15:15,15:30,15:45,16:00,16:15,16:30,16:45,17:00,17:12,17:24,17:36,17:48,18:00,18:12,18 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataSchedule_531_f1 {
+        internal static string data_schedule_531_f1 {
             get {
-                return ResourceManager.GetString("DataSchedule_531_f1", resourceCulture);
+                return ResourceManager.GetString("data_schedule_531_f1", resourceCulture);
             }
         }
     }
