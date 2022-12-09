@@ -5,10 +5,10 @@ namespace BusTable.Service.Services
 {
     public class StopService
     {
-        private readonly ImportService _importService;
+        private readonly IImportService _importService;
         private readonly StopRegistry _stopRegistry;
 
-        public StopService(ImportService importService)
+        public StopService(IImportService importService)
         {
             _importService = importService;
 

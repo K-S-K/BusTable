@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RouteList Count="5">
+    <Route>
+        <RouteNumber>304</RouteNumber>
+        <LongName>გლდანის VII - VIII მ/რ - სახ. უნივერსიტეტის მ/კ</LongName>
+        <StopA>State University H/B</StopA>
+        <StopB>Gldani VII-VIII M/D</StopB>
+    </Route>
+    <Route>
+        <RouteNumber>310</RouteNumber>
+        <LongName>ბარათაშვილის ქუჩა - სახ. უნივერსიტეტის მ/კ</LongName>
+        <StopA>State University H/B</StopA>
+        <StopB>Baratashvili Str.</StopB>
+    </Route>
+    <Route>
+        <RouteNumber>383</RouteNumber>
+        <LongName>მ/ს სახელმწიფო უნივერსიტეტი - ბარათაშვილის ქუჩა</LongName>
+        <StopA>Baratashvili Str.</StopA>
+        <StopB>M/S SAKHELMTSIPO UNIVERSITETI</StopB>
+    </Route>
+    <Route>
+        <RouteNumber>387</RouteNumber>
+        <LongName>საბურთალო-ვაკე</LongName>
+        <StopA>SABURTALO-VAKE</StopA>
+        <StopB>SABURTALO-VAKE</StopB>
+    </Route>
+    <Route>
+        <RouteNumber>531</RouteNumber>
+        <LongName>ხიზანიშვილის და ლესელიძისა  ქ. გადაკვეთა  - ფალიაშვილის ქ.</LongName>
+        <StopA>PALIASHVILIS K.</StopA>
+        <StopB>GLDANIS VI-VIII M/R</StopB>
+    </Route>
+</RouteList>

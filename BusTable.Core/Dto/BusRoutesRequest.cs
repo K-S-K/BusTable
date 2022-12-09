@@ -1,4 +1,6 @@
-﻿namespace BusTable.Core.Dto
+﻿using System.Text;
+
+namespace BusTable.Core.Dto
 {
     public class BusRoutesRequest
     {
@@ -43,6 +45,30 @@
                     _pageSize = value;
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new();
+
+            sb.Append($"Lang: {Language}");
+
+            if (!string.IsNullOrWhiteSpace(Search))
+            {
+                sb.Append($"{nameof(Search)}: \"{Search}\"");
+            }
+
+            if (PageSize != int.MaxValue)
+            {
+                sb.Append($"${nameof(PageSize)}: {PageSize}");
+            }
+
+            if (PageNumber != 1 || PageSize != int.MaxValue)
+            {
+                sb.Append($"${nameof(PageNumber)}: {PageNumber}");
+            }
+
+            return sb.ToString();
         }
     }
 }
