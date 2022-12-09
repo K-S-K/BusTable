@@ -16,7 +16,7 @@ namespace BusTable.Test
                 Language = "ANY"
             };
 
-            RouteList routeList = new(XElement.Parse(Source.DataRouteList));
+            RouteList routeList = new(XElement.Parse(Source.data_route_list));
 
             routeList.Routes.Values.ToList().ForEach(x => data.Items.Add(x.RouteNumber, new()
             {

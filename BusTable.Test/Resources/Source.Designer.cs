@@ -76,9 +76,9 @@ namespace BusTable.Test.Resources {
         ///        &lt;StopB&gt;Baratashvili Str.&lt;/StopB&gt;
         ///  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DataRouteList {
+        internal static string data_route_list {
             get {
-                return ResourceManager.GetString("DataRouteList", resourceCulture);
+                return ResourceManager.GetString("data_route_list", resourceCulture);
             }
         }
         
