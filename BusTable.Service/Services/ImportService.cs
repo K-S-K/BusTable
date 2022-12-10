@@ -7,7 +7,16 @@ namespace BusTable.Service.Services
 {
     public class ImportService : IImportService
     {
-        private ImportSourceSettings _settings;
+        private readonly ImportSourceSettings? _settings;
+        private ImportSourceSettings Settings
+        {
+            get
+            {
+                return _settings ??
+                    throw new NotImplementedException(
+                    $"{nameof(_settings)} was not provided");
+            }
+        }
 
         public ImportService(ImportSourceSettings settings)
         {
@@ -16,7 +25,8 @@ namespace BusTable.Service.Services
 
         public RouteRegistry LoadRouteRegistry()
         {
-            string fileName = Path.Combine(_settings.Directory, _settings.RouteListFileName);
+
+            string fileName = Path.Combine(Settings.Directory, Settings.RouteListFileName);
 
             RouteList routeList = RouteList.Load(fileName);
 
@@ -25,26 +35,7 @@ namespace BusTable.Service.Services
                 Language = "ANY"
             };
 
-            foreach (var routeIn in routeList.Routes.Values.ToList())
-            {
-                if (routeIn.RouteNumber == "0")
-                {
-                    continue;
-                }
-
-                if (data.Items.ContainsKey(routeIn.RouteNumber))
-                {
-                    continue;
-                }
-
-                data.Items.Add(routeIn.RouteNumber, new()
-                {
-                    Number = routeIn.RouteNumber,
-                    Name = routeIn.LongName,
-                    Stop1 = routeIn.StopA,
-                    Stop2 = routeIn.StopB,
-                });
-            }
+            routeList.Routes.Values.ToList().ForEach(x => data.Add(x));
 
             return data;
         }
@@ -53,7 +44,7 @@ namespace BusTable.Service.Services
         {
             var ix = routeIds.Distinct().ToHashSet();
             var stops = new Dictionary<string, StopData>();
-            var fileNames = Directory.EnumerateFiles(_settings.Directory, "*f1.xml");
+            var fileNames = Directory.EnumerateFiles(Settings.Directory, "*f1.xml");
 
             foreach (var fileName in fileNames)
             {
@@ -75,7 +66,7 @@ namespace BusTable.Service.Services
             return ApplyRouteSchedule(stopDataService, schedule);
         }
 
-        public static StopData ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
+        public StopData ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
         {
             StopData data = new()
             {
@@ -113,7 +104,7 @@ namespace BusTable.Service.Services
 
         public StopRegistry LoadStopRegistry()
         {
-            string fileName = Path.Combine(_settings.Directory, _settings.StopListFileName);
+            string fileName = Path.Combine(Settings.Directory, Settings.StopListFileName);
 
             StopRegistry data = new();
             data.Load(fileName);
