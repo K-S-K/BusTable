@@ -83,6 +83,15 @@ namespace BusTable.Test.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&lt;Schedule&gt;&lt;Forward&gt;false&lt;/Forward&gt;&lt;RouteNumber&gt;304&lt;/RouteNumber&gt;&lt;WeekdaySchedules&gt;&lt;FromDay&gt;MONDAY&lt;/FromDay&gt;&lt;Stops&gt;&lt;ArriveTimes&gt;7:42,8:14,8:30,8:46,9:02,9:18,9:34,9:50,10:06,10:22,10:38,10:54,11:10,11:26,11:42,11:58,12:14,12:30,12:46,13:02,13:18,13:34,13:50,14:06,14:22,14:38,14:54,15:10,15:26,15:42,15:58,16:14,16:30,16:46,17:02,17:18,17:34,17:50,18:06,18:22,18:38,18:54,19:10,19:26,19:42,19:58,20:14,20:30,20:46,21:02,21:18,21:34,21:50,22:06,22:22,22:38,22 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string data_schedule_304_f0 {
+            get {
+                return ResourceManager.GetString("data_schedule_304_f0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
         ///&lt;Schedule&gt;
         ///    &lt;Forward&gt;true&lt;/Forward&gt;

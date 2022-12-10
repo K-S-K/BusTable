@@ -1,4 +1,5 @@
 ﻿using BusTable.Core.Dto;
+using BusTable.Core.Import;
 
 namespace BusTable.Core.Models
 {
@@ -39,6 +40,27 @@ namespace BusTable.Core.Models
             }
 
             return result;
+        }
+
+        public void Add(RouteItem item)
+        {
+            if (item.RouteNumber == "0")
+            {
+                return;
+            }
+
+            if (Items.ContainsKey(item.RouteNumber))
+            {
+                return;
+            }
+
+            Items.Add(item.RouteNumber, new()
+            {
+                Number = item.RouteNumber,
+                Name = item.LongName,
+                Stop1 = item.StopA,
+                Stop2 = item.StopB,
+            });
         }
 
         public override string ToString() => $"{nameof(Items.Count)}:{Items.Count} {nameof(Language)}:{Language}";
