@@ -40,15 +40,15 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
+        public Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
         {
             var ix = routeIds.Distinct().ToHashSet();
-            var stops = new Dictionary<string, StopData>();
+            var stops = new Dictionary<string, StopRouteSchedule>();
             var fileNames = Directory.EnumerateFiles(Settings.Directory, "*f1.xml");
 
             foreach (var fileName in fileNames)
             {
-                StopData data = LoadRouteSchedule(fileName, stopDataService);
+                StopRouteSchedule data = LoadRouteSchedule(fileName, stopDataService);
 
                 if (ix.Contains(data.RouteNumber))
                 {
@@ -59,16 +59,16 @@ namespace BusTable.Service.Services
             return stops;
         }
 
-        public StopData LoadRouteSchedule(string fileName, StopService stopDataService)
+        public StopRouteSchedule LoadRouteSchedule(string fileName, StopService stopDataService)
         {
             RouteSchedule schedule = RouteSchedule.Load(fileName);
 
             return ApplyRouteSchedule(stopDataService, schedule);
         }
 
-        public StopData ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
+        public StopRouteSchedule ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
         {
-            StopData data = new()
+            StopRouteSchedule data = new()
             {
                 Language = "ANY",
                 RouteNumber = schedule.RouteNumber,

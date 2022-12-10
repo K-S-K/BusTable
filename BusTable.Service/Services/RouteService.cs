@@ -9,10 +9,10 @@ namespace BusTable.Service.Services
         private readonly StopService _stopDataService;
         private readonly IImportService _importService;
 
-        private readonly Dictionary<string, StopData> stopData = new();
+        private readonly Dictionary<string, StopRouteSchedule> stopData = new();
         private readonly RouteRegistry routeRegistry;
 
-        public async Task<StopData?> GetRouteStops(IBusRouteStopsRequest request)
+        public async Task<StopRouteSchedule?> GetRouteStops(IBusRouteStopsRequest request)
         {
             var result = stopData.TryGetValue(request.RouteNumber, out var data) ? data : null;
 
