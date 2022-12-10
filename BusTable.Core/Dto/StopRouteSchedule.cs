@@ -2,7 +2,7 @@
 
 namespace BusTable.Core.Dto
 {
-    public class StopData
+    public class StopRouteSchedule
     {
         public string Language { get; set; } = null!;
         public string RouteNumber { get; set; } = null!;

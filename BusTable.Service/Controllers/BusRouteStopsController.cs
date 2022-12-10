@@ -24,7 +24,7 @@ namespace BusTable.Service.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<StopData>> GetRouteStops([FromQuery] BusRouteStopsRequest request)
+        public async Task<ActionResult<StopRouteSchedule>> GetRouteStops([FromQuery] BusRouteStopsRequest request)
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,7 +34,7 @@ namespace BusTable.Service.Controllers
             }
             */
 
-            StopData? data;
+            StopRouteSchedule? data;
             try { data = await _dataTransferProviderService.GetRouteStops(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }

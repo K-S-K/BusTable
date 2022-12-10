@@ -28,14 +28,14 @@ namespace BusTable.Test
             return data;
         }
 
-        public new StopData LoadRouteSchedule(string fileName, StopService stopDataService)
+        public new StopRouteSchedule LoadRouteSchedule(string fileName, StopService stopDataService)
         {
             throw new NotImplementedException();
         }
 
-        public new Dictionary<string, StopData> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
+        public new Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
         {
-            var stops = new Dictionary<string, StopData>();
+            var stops = new Dictionary<string, StopRouteSchedule>();
 
             AddRoute(XElement.Parse(Source.data_schedule_304_f0));
             AddRoute(XElement.Parse(Source.data_schedule_304_f1));
@@ -53,7 +53,7 @@ namespace BusTable.Test
             void AddRoute(XElement xe)
             {
                 RouteSchedule schedule = new(xe);
-                StopData stopData = ApplyRouteSchedule(stopDataService, schedule);
+                StopRouteSchedule stopData = ApplyRouteSchedule(stopDataService, schedule);
 
                 stops[stopData.RouteNumber] = stopData;
             }

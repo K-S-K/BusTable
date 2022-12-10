@@ -46,7 +46,7 @@ namespace BusTable.Service.Services
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? stops = await _routeService.GetRouteStops(request);
+            StopRouteSchedule? stops = await _routeService.GetRouteStops(request);
             if (stops == null)
             {
                 return null;
@@ -69,7 +69,7 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public async Task<StopData?> GetRouteStops(BusRouteStopsRequest request)
+        public async Task<StopRouteSchedule?> GetRouteStops(BusRouteStopsRequest request)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace BusTable.Service.Services
                 throw new BadRequestException(ex.Message);
             }
 
-            StopData? data = await _routeService.GetRouteStops(request);
+            StopRouteSchedule? data = await _routeService.GetRouteStops(request);
 
             return data;
         }
