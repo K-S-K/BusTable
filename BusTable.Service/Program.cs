@@ -7,10 +7,9 @@ var importSourceSettings = builder.Configuration.GetSection("ImportSource").Get<
 
 // Add services to the container.
 builder.Services.AddSingleton<BusTable.Service.Services.LanguageValidationService>();
-builder.Services.AddSingleton<BusTable.Service.Services.DataTransferProviderService>();
 builder.Services.AddSingleton<BusTable.Service.Services.RouteService>();
 builder.Services.AddSingleton<BusTable.Service.Services.StopService>();
-builder.Services.AddSingleton< BusTable.Service.Services.IImportService, BusTable.Service.Services.ImportService>(sp =>
+builder.Services.AddSingleton<BusTable.Service.Services.IImportService, BusTable.Service.Services.ImportService>(sp =>
                               new BusTable.Service.Services.ImportService(importSourceSettings));
 
 builder.Services.AddControllers();

@@ -12,14 +12,14 @@ namespace BusTable.Service.Controllers
     public class BusRoutesController : Controller
     {
         private readonly ILogger<BusRoutesController> _logger;
-        private readonly DataTransferProviderService _dataTransferProviderService;
+        private readonly RouteService _routeService;
 
         public BusRoutesController(
             ILogger<BusRoutesController> logger,
-            DataTransferProviderService dataTransferProviderService)
+            RouteService routeService)
         {
             _logger = logger;
-            _dataTransferProviderService = dataTransferProviderService;
+            _routeService = routeService;
         }
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace BusTable.Service.Controllers
 
 
             BusRouteData? data;
-            try { data = await _dataTransferProviderService.GetRoutes(request); }
+            try { data = await _routeService.GetRoutes(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 
