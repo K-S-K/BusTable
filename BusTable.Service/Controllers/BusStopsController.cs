@@ -12,14 +12,14 @@ namespace BusTable.Service.Controllers
     public class BusStopsController : Controller
     {
         private readonly ILogger<BusRoutesController> _logger;
-        private readonly StopService _stopDataService;
+        private readonly RouteService _routeService;
 
         public BusStopsController(
             ILogger<BusRoutesController> logger,
-            StopService stopDataService)
+            RouteService routeService)
         {
             _logger = logger;
-            _stopDataService = stopDataService;
+            _routeService = routeService;
         }
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace BusTable.Service.Controllers
 
 
             IEnumerable<StopHeader>? data;
-            try { data = _stopDataService.GetStops(language, lat, lon); }
+            try { data = _routeService.GetStops(language, lat, lon); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 

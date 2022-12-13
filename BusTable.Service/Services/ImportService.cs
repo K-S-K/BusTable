@@ -39,7 +39,7 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, StopService stopDataService)
+        public Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, RouteService routeService)
         {
             var ix = routeIds.Distinct().ToHashSet();
             var stops = new Dictionary<string, StopRouteSchedule>();
@@ -47,7 +47,7 @@ namespace BusTable.Service.Services
 
             foreach (var fileName in fileNames)
             {
-                StopRouteSchedule data = LoadRouteSchedule(fileName, stopDataService);
+                StopRouteSchedule data = LoadRouteSchedule(fileName, routeService);
 
                 if (ix.Contains(data.RouteNumber))
                 {
@@ -58,14 +58,14 @@ namespace BusTable.Service.Services
             return stops;
         }
 
-        public StopRouteSchedule LoadRouteSchedule(string fileName, StopService stopDataService)
+        public StopRouteSchedule LoadRouteSchedule(string fileName, RouteService routeService)
         {
             RouteSchedule schedule = RouteSchedule.Load(fileName);
 
-            return ApplyRouteSchedule(stopDataService, schedule);
+            return ApplyRouteSchedule(routeService, schedule);
         }
 
-        public StopRouteSchedule ApplyRouteSchedule(StopService stopDataService, RouteSchedule schedule)
+        public StopRouteSchedule ApplyRouteSchedule(RouteService routeService, RouteSchedule schedule)
         {
             StopRouteSchedule data = new()
             {
@@ -79,9 +79,9 @@ namespace BusTable.Service.Services
                 {
                     throw new Exception($"The {nameof(RouteStop)} has not {nameof(input.StopId)} value: {input}");
                 }
-                if (!stopDataService.TryGetById(input.StopId, out StopHeader? stopHeader))
+                if (!routeService.TryGetStopById(input.StopId, out StopHeader? stopHeader))
                 {
-                    stopDataService.AddStop(input);
+                    routeService.AddStop(input);
                 }
 
                 if (stopHeader == null)
