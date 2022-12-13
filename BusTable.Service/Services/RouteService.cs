@@ -1,15 +1,16 @@
 ﻿using BusTable.Core.Dto;
+using BusTable.Core.Import;
 using BusTable.Core.Models;
 
 namespace BusTable.Service.Services
 {
     public class RouteService
     {
-        private readonly StopService _stopDataService;
         private readonly IImportService _importService;
 
         private readonly ScheduleRegistry scheduleRegistry = new();
         private readonly RouteRegistry routeRegistry;
+        private readonly StopRegistry stopRegistry;
 
         public async Task<BusDepartureTimeData?> GetBusDepartureTimesForTheStop(BusDepartureTimesForTheStopRequest request)
         {
@@ -60,14 +61,23 @@ namespace BusTable.Service.Services
             return result;
         }
 
-        public RouteService(StopService stopDataService,
-            IImportService importService)
+
+        public bool TryGetStopById(int code, out StopHeader? item) => stopRegistry.TryGetById(code, out item);
+
+        public IEnumerable<StopHeader> GetStops(string language, double lat, double lon)
         {
-            _stopDataService = stopDataService;
+            return stopRegistry.Stops;
+        }
+
+        public void AddStop(RouteStop item) => stopRegistry.AddStop(item);
+
+        public RouteService(IImportService importService)
+        {
             _importService = importService;
 
+            stopRegistry = _importService.LoadStopRegistry();
             routeRegistry = _importService.LoadRouteRegistry();
-            scheduleRegistry.stopData = _importService.LoadStopData(routeRegistry.Items.Keys, _stopDataService);
+            scheduleRegistry.stopData = _importService.LoadStopData(routeRegistry.Items.Keys, this);
 
             HashSet<string> routeIds = scheduleRegistry.stopData.Keys.ToHashSet();
             HashSet<string> routeDel = new();

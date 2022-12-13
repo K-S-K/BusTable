@@ -16,10 +16,7 @@ namespace BusTable.Test
         {
             var logger = Mock.Of<ILogger<RouteService>>();
 
-            RouteService service = new(
-                new StopService(importService),
-                importService);
-
+            RouteService service = new(importService);
 
             BusRoutesRequest request = new();
 
@@ -33,16 +30,12 @@ namespace BusTable.Test
         {
             var logger = Mock.Of<ILogger<RouteService>>();
 
-            RouteService service = new(
-                new StopService(importService),
-                importService);
-
+            RouteService service = new(importService);
 
             BusRoutesRequest request = new()
             {
                 Search = "Univer"
             };
-
 
             BusRouteData responce = service.GetRoutes(request).Result;
 
@@ -55,10 +48,7 @@ namespace BusTable.Test
         {
             var logger = Mock.Of<ILogger<RouteService>>();
 
-            RouteService service = new(
-                new StopService(importService),
-                importService);
-
+            RouteService service = new(importService);
 
             BusDepartureTimesForTheStopRequest request = new()
             {
