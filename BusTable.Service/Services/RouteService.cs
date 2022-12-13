@@ -1,29 +1,18 @@
-﻿using BusTable.Core.Common;
-using BusTable.Core.Dto;
+﻿using BusTable.Core.Dto;
 using BusTable.Core.Models;
 
 namespace BusTable.Service.Services
 {
     public class RouteService
     {
-        private readonly LanguageValidationService _languageValidationService;
         private readonly StopService _stopDataService;
         private readonly IImportService _importService;
 
-        private readonly Dictionary<string, StopRouteSchedule> stopData = new();
+        private readonly ScheduleRegistry scheduleRegistry = new();
         private readonly RouteRegistry routeRegistry;
 
         public async Task<BusDepartureTimeData?> GetBusDepartureTimesForTheStop(BusDepartureTimesForTheStopRequest request)
         {
-            try
-            {
-                _languageValidationService.Validate(request.Language);
-            }
-            catch (Exception ex)
-            {
-                throw new BadRequestException(ex.Message);
-            }
-
             StopRouteSchedule? stops = await GetRouteStops(request);
             if (stops == null)
             {
@@ -49,29 +38,38 @@ namespace BusTable.Service.Services
 
         public async Task<StopRouteSchedule?> GetRouteStops(IBusRouteStopsRequest request)
         {
-            var result = stopData.TryGetValue(request.RouteNumber, out var data) ? data : null;
+            var result = await scheduleRegistry.GetRouteStops(request);
 
-            return (await Task.FromResult(result));
+            return result;
         }
 
         public async Task<BusRouteData> GetRoutes(BusRoutesRequest request)
         {
-            return await routeRegistry.GetRoutes(request);
+            IQueryable<BusRouteItem> items = await routeRegistry.GetRoutes(request);
+
+            BusRouteData result = new()
+            {
+                Language = request.Language,
+                PageNumber = request.PageNumber
+            };
+            foreach (var item in items)
+            {
+                result.Items.Add(item);
+            }
+
+            return result;
         }
 
         public RouteService(StopService stopDataService,
-            LanguageValidationService languageValidationService,
-            IImportService importService
-            )
+            IImportService importService)
         {
-            _languageValidationService = languageValidationService;
             _stopDataService = stopDataService;
             _importService = importService;
 
             routeRegistry = _importService.LoadRouteRegistry();
-            stopData = _importService.LoadStopData(routeRegistry.Items.Keys, _stopDataService);
+            scheduleRegistry.stopData = _importService.LoadStopData(routeRegistry.Items.Keys, _stopDataService);
 
-            HashSet<string> routeIds = stopData.Keys.ToHashSet();
+            HashSet<string> routeIds = scheduleRegistry.stopData.Keys.ToHashSet();
             HashSet<string> routeDel = new();
 
             foreach (var id in routeRegistry.Items.Keys)

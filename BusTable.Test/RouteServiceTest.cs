@@ -18,7 +18,6 @@ namespace BusTable.Test
 
             RouteService service = new(
                 new StopService(importService),
-                new LanguageValidationService(),
                 importService);
 
 
@@ -36,7 +35,6 @@ namespace BusTable.Test
 
             RouteService service = new(
                 new StopService(importService),
-                new LanguageValidationService(),
                 importService);
 
 
@@ -59,7 +57,6 @@ namespace BusTable.Test
 
             RouteService service = new(
                 new StopService(importService),
-                new LanguageValidationService(),
                 importService);
 
 

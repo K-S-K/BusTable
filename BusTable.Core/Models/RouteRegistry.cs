@@ -8,7 +8,7 @@ namespace BusTable.Core.Models
         public string Language { get; set; } = null!;
         public Dictionary<string, BusRouteItem> Items { get; set; } = new();
 
-        public async Task<BusRouteData> GetRoutes(BusRoutesRequest request)
+        public async Task<IQueryable<BusRouteItem>> GetRoutes(BusRoutesRequest request)
         {
             IQueryable<BusRouteItem> items = (await Task.FromResult(Items.Values.ToList())).AsQueryable();
 
@@ -28,18 +28,7 @@ namespace BusTable.Core.Models
             items = items
             .Skip(request.PageSize * (request.PageNumber - 1))
             .Take(request.PageSize);
-
-            BusRouteData result = new()
-            {
-                Language = Language,
-                PageNumber = request.PageNumber
-            };
-            foreach (var item in items)
-            {
-                result.Items.Add(item);
-            }
-
-            return result;
+            return items;
         }
 
         public void Add(RouteItem item)
