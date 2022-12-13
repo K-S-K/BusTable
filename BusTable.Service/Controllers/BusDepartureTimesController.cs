@@ -9,21 +9,22 @@ namespace BusTable.Service.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("[controller]")]
-    public class BusDepartureTimesForTheStopController : ControllerBase
+    public class BusDepartureTimesController : ControllerBase
     {
-        private readonly ILogger<BusDepartureTimesForTheStopController> _logger;
-        private readonly DataTransferProviderService _dataTransferProviderService;
+        private readonly ILogger<BusDepartureTimesController> _logger;
+        private readonly RouteService _routeService;
 
-        public BusDepartureTimesForTheStopController(
-            ILogger<BusDepartureTimesForTheStopController> logger,
-            DataTransferProviderService dataTransferProviderService)
+        public BusDepartureTimesController(
+            ILogger<BusDepartureTimesController> logger,
+            RouteService routeService
+)
         {
             _logger = logger;
-            _dataTransferProviderService = dataTransferProviderService;
+            _routeService = routeService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<BusDepartureTimeData>> GetBusDepartureTimesForTheStop([FromQuery] BusDepartureTimesForTheStopRequest request)
+        public async Task<ActionResult<BusDepartureTimeData>> GetBusDepartureTimes([FromQuery] BusDepartureTimesForTheStopRequest request)
         {
             /*
             // TODO: It must be in the Middleware
@@ -35,7 +36,7 @@ namespace BusTable.Service.Controllers
 
 
             BusDepartureTimeData? data;
-            try { data = await _dataTransferProviderService.GetBusDepartureTimesForTheStop(request); }
+            try { data = await _routeService.GetBusDepartureTimesForTheStop(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 
