@@ -34,6 +34,19 @@ namespace BusTable.Service.Controllers
             }
             */
 
+            /*
+            // TODO: It must be in the Middleware
+            try
+            {
+                _languageValidationService.Validate(request.Language);
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+            */
+
+
             StopRouteSchedule? data;
             try { data = await _routeService.GetRouteStops(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }

@@ -25,7 +25,6 @@ namespace BusTable.Service.Services
 
         public RouteRegistry LoadRouteRegistry()
         {
-
             string fileName = Path.Combine(Settings.Directory, Settings.RouteListFileName);
 
             RouteList routeList = RouteList.Load(fileName);
