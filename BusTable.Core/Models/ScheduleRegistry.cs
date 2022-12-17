@@ -1,6 +1,6 @@
 ﻿using BusTable.Core.Dto;
 
-namespace BusTable.Service.Services
+namespace BusTable.Core.Models
 {
     public class ScheduleRegistry
     {
