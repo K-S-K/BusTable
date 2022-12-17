@@ -39,30 +39,14 @@ namespace BusTable.Service.Services
             return data;
         }
 
-        public Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, RouteService routeService)
+        public ScheduleRegistry LoadScheduleRegistry(IEnumerable<string> routeIds, RouteService routeService)
         {
-            var ix = routeIds.Distinct().ToHashSet();
-            var stops = new Dictionary<string, StopRouteSchedule>();
-            var fileNames = Directory.EnumerateFiles(Settings.Directory, "*f1.xml");
-
-            foreach (var fileName in fileNames)
+            ScheduleRegistry data = new()
             {
-                StopRouteSchedule data = LoadRouteSchedule(fileName, routeService);
+                stopData = LoadStopData(routeIds, routeService)
+            };
 
-                if (ix.Contains(data.RouteNumber))
-                {
-                    stops[data.RouteNumber] = data;
-                }
-            }
-
-            return stops;
-        }
-
-        public StopRouteSchedule LoadRouteSchedule(string fileName, RouteService routeService)
-        {
-            RouteSchedule schedule = RouteSchedule.Load(fileName);
-
-            return ApplyRouteSchedule(routeService, schedule);
+            return data;
         }
 
         public StopRouteSchedule ApplyRouteSchedule(RouteService routeService, RouteSchedule schedule)
@@ -99,6 +83,32 @@ namespace BusTable.Service.Services
                 });
             }
             return data;
+        }
+
+        protected Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, RouteService routeService)
+        {
+            var ix = routeIds.Distinct().ToHashSet();
+            var stops = new Dictionary<string, StopRouteSchedule>();
+            var fileNames = Directory.EnumerateFiles(Settings.Directory, "*f1.xml");
+
+            foreach (var fileName in fileNames)
+            {
+                StopRouteSchedule data = LoadRouteSchedule(fileName, routeService);
+
+                if (ix.Contains(data.RouteNumber))
+                {
+                    stops[data.RouteNumber] = data;
+                }
+            }
+
+            return stops;
+        }
+
+        private StopRouteSchedule LoadRouteSchedule(string fileName, RouteService routeService)
+        {
+            RouteSchedule schedule = RouteSchedule.Load(fileName);
+
+            return ApplyRouteSchedule(routeService, schedule);
         }
 
         public StopRegistry LoadStopRegistry()

@@ -8,7 +8,7 @@ namespace BusTable.Service.Services
     {
         private readonly IImportService _importService;
 
-        private readonly ScheduleRegistry scheduleRegistry = new();
+        private readonly ScheduleRegistry scheduleRegistry;
         private readonly RouteRegistry routeRegistry;
         private readonly StopRegistry stopRegistry;
 
@@ -77,7 +77,7 @@ namespace BusTable.Service.Services
 
             stopRegistry = _importService.LoadStopRegistry();
             routeRegistry = _importService.LoadRouteRegistry();
-            scheduleRegistry.stopData = _importService.LoadStopData(routeRegistry.Items.Keys, this);
+            scheduleRegistry = _importService.LoadScheduleRegistry(routeRegistry.Items.Keys, this);
 
             HashSet<string> routeIds = scheduleRegistry.stopData.Keys.ToHashSet();
             HashSet<string> routeDel = new();
