@@ -28,12 +28,24 @@ namespace BusTable.Test
             return data;
         }
 
-        public new StopRouteSchedule LoadRouteSchedule(string fileName, RouteService routeService)
+        public new ScheduleRegistry LoadScheduleRegistry(IEnumerable<string> routeIds, RouteService routeService)
         {
-            throw new NotImplementedException();
+            ScheduleRegistry data = new()
+            {
+                stopData = LoadStopData(routeIds, routeService)
+            };
+
+            return data;
         }
 
-        public new Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, RouteService routeService)
+        public new StopRegistry LoadStopRegistry()
+        {
+            StopRegistry data = new();
+
+            return data;
+        }
+
+        protected new Dictionary<string, StopRouteSchedule> LoadStopData(IEnumerable<string> routeIds, RouteService routeService)
         {
             var stops = new Dictionary<string, StopRouteSchedule>();
 
@@ -57,14 +69,6 @@ namespace BusTable.Test
 
                 stops[stopData.RouteNumber] = stopData;
             }
-        }
-
-
-        public new StopRegistry LoadStopRegistry()
-        {
-            StopRegistry data = new();
-
-            return data;
         }
     }
 }
