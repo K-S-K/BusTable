@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using BusTable.Core.Dto;
 using BusTable.Core.Common;
-using BusTable.Core.Models;
 using BusTable.Service.Services;
 
 namespace BusTable.Service.Controllers
@@ -23,7 +23,7 @@ namespace BusTable.Service.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<StopHeader>> GetStops(string language = "ANY", double lat = 0.0, double lon = 0.0)
+        public async Task<ActionResult<IEnumerable<BusStopHeader>>> GetStops([FromQuery] BusStopsRequest request)
         {
             /*
             // TODO: It must be in the Middleware
@@ -34,8 +34,8 @@ namespace BusTable.Service.Controllers
             */
 
 
-            IEnumerable<StopHeader>? data;
-            try { data = _routeService.GetStops(language, lat, lon); }
+            IEnumerable<BusStopHeader>? data;
+            try { data = await _routeService.GetStops(request); }
             catch (BadRequestException ex) { return BadRequest(ex.Message); }
             catch (Exception ex) { return Problem(ex.Message); }
 
@@ -46,6 +46,5 @@ namespace BusTable.Service.Controllers
 
             return Ok(data);
         }
-
     }
 }

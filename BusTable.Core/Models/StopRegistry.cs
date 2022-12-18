@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
 
+using BusTable.Core.Dto;
+
 namespace BusTable.Core.Models
 {
     public class StopRegistry
@@ -9,6 +11,28 @@ namespace BusTable.Core.Models
         public List<StopHeader> Stops { get; set; } = new();
 
         public bool TryGetById(int code, out StopHeader? item) => _ixCode.TryGetValue(code, out item);
+
+        public async Task<IEnumerable<BusStopHeader>> GetStops(BusStopsRequest request)
+        {
+            IQueryable<BusStopHeader> items = (await Task.FromResult(Stops.Select(x =>
+            new BusStopHeader()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Lat = x.Lat,
+                Lon = x.Lon,
+                Distance = x.GetDistance(request.Lat, request.Lon)
+            }
+            ))).AsQueryable();
+
+            if (request.DistanceCencitive)
+            {
+                items = items
+                    .Where(x => (x.Distance <= request.MaxDistance));
+            }
+
+            return items;
+        }
 
         public void Load(string fileName)
         {
