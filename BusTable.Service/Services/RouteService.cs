@@ -64,9 +64,9 @@ namespace BusTable.Service.Services
 
         public bool TryGetStopById(int code, out StopHeader? item) => stopRegistry.TryGetById(code, out item);
 
-        public IEnumerable<StopHeader> GetStops(string language, double lat, double lon)
+        public async Task<IEnumerable<BusStopHeader>> GetStops(BusStopsRequest request)
         {
-            return stopRegistry.Stops;
+            return await stopRegistry.GetStops(request);
         }
 
         public void AddStop(RouteStop item) => stopRegistry.AddStop(item);
