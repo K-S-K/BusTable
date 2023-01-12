@@ -2,7 +2,7 @@
 
 namespace BusTable.Core.Dto
 {
-    public class BusRoutesRequest
+    public class BusRoutesRequest : RequestWithLanguage
     {
         #region -> Data
         private int _maxPageSize = int.MaxValue;
@@ -11,8 +11,6 @@ namespace BusTable.Core.Dto
         private int _minPageNumber = 1;
         private int _pageNumber = 1;
         #endregion
-
-        public string Language { get; set; } = "ANY";
 
         public int CityId { get; set; } = 0;
 
@@ -51,8 +49,6 @@ namespace BusTable.Core.Dto
         {
             StringBuilder sb = new();
 
-            sb.Append($"Lang: {Language}");
-
             if (!string.IsNullOrWhiteSpace(Search))
             {
                 sb.Append($"{nameof(Search)}: \"{Search}\"");
@@ -67,6 +63,8 @@ namespace BusTable.Core.Dto
             {
                 sb.Append($"${nameof(PageNumber)}: {PageNumber}");
             }
+
+            sb.Append(base.ToString());
 
             return sb.ToString();
         }

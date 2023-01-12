@@ -1,9 +1,7 @@
 ﻿namespace BusTable.Core.Dto
 {
-    public class BusDepartureTimesForTheStopRequest: IBusRouteStopsRequest
+    public class BusDepartureTimesForTheStopRequest : RequestWithLanguage, IBusRouteStopsRequest
     {
-        public string Language { get; set; } = "ANY";
-
         public int CityId { get; set; } = 0;
 
         /// <summary>
