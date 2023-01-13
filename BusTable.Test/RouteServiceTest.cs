@@ -26,6 +26,23 @@ namespace BusTable.Test
         }
 
         [TestMethod]
+        public void RoutesPagingTest()
+        {
+            var logger = Mock.Of<ILogger<RouteService>>();
+
+            RouteService service = new(importService);
+
+            BusRoutesRequest request1 = new() { PageNumber = 1, PageSize = 3 };
+            BusRoutesRequest request2 = new() { PageNumber = 2, PageSize = 3 };
+
+            BusRouteData responce1 = service.GetRoutes(request1).Result;
+            BusRouteData responce2 = service.GetRoutes(request2).Result;
+
+            Assert.AreEqual(3, responce1.Count, $"{nameof(BusRoutesRequest)}: {request1}");
+            Assert.AreEqual(2, responce2.Count, $"{nameof(BusRoutesRequest)}: {request2}");
+        }
+
+        [TestMethod]
         public void RoutesFilteringTest_Univer()
         {
             var logger = Mock.Of<ILogger<RouteService>>();

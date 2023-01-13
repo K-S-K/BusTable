@@ -12,7 +12,7 @@ namespace BusTable.Core.Models
 
         public bool TryGetById(int code, out StopHeader? item) => _ixCode.TryGetValue(code, out item);
 
-        public async Task<IEnumerable<BusStopHeader>> GetStops(BusStopsRequest request)
+        public async Task<IQueryable<BusStopHeader>> GetStops(BusStopsRequest request)
         {
             IQueryable<BusStopHeader> items = (await Task.FromResult(Stops.Select(x =>
             new BusStopHeader()
@@ -30,6 +30,10 @@ namespace BusTable.Core.Models
                 items = items
                     .Where(x => (x.Distance <= request.MaxDistance));
             }
+
+            items = items
+                .Skip(request.PageSize * (request.PageNumber - 1))
+                .Take(request.PageSize);
 
             return items;
         }
