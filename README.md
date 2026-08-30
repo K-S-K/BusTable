@@ -90,8 +90,8 @@ working data directory out of the test snapshot in the repository.
 
 This is a 2022–2023 experiment, revisited in 2026 to document it. It builds
 clean on the current .NET SDK and all tests pass, but it targets the
-out-of-support `net7.0`, only imports one direction of each route, and carries
-three reproduced defects. All of that is written down honestly in
+out-of-support `net7.0`, imports only one direction of each route and only the
+weekday half of each timetable, and carries several reproduced defects. All of that is written down honestly in
 [Doc/08-Status-and-Backlog.md](Doc/08-Status-and-Backlog.md).
 
 ## Documentation

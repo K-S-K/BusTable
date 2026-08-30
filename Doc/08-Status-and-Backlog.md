@@ -27,8 +27,8 @@ endpoints against the test snapshot.
 
 ## Defects found
 
-These were found by reading and then reproduced. None of them are covered by
-the existing tests.
+These were found by reading and then reproduced against the data in the
+repository. None of them are covered by the existing tests.
 
 ### 1. A stop is dropped from the first route that introduces it
 
@@ -96,7 +96,33 @@ time parsing in the same class is already careful to pass
 `CultureInfo.InvariantCulture`; the coordinate parsing was simply missed. The
 JSON stop list is unaffected — `System.Text.Json` is invariant by design.
 
-### 4. Nearest-stop results are not sorted by distance
+### 4. Weekend and Sunday timetables are silently discarded
+
+`RouteSchedule` reads `value?.Element("WeekdaySchedules")` — singular. The
+source documents carry one block per day band, and everything after the first
+is dropped without a warning. Measured across the snapshot:
+
+| File | Blocks in the source | Stop entries read | Discarded |
+| --- | --- | --- | --- |
+| 304 f1 | Mon–Fri, Sat, Sun | 56 | 112 |
+| 304 f0 | Mon–Fri, Sat, Sun | 55 | 110 |
+| 310 f1 | Mon–Fri, Sat, Sun | 32 | 64 |
+| 310 f0 | Mon–Fri, Sat, Sun | 31 | 62 |
+| 531 f0 | Mon–Fri, Sat–Sun | 57 | 57 |
+| 383, 387 | Mon–Sun only | all | 0 |
+
+The dropped blocks are real data, not duplicates. Route 304's first stop departs
+at `7:42, 8:14, 8:30, 8:46 …` on weekdays but `7:50, 8:10, 8:30, 8:50 …` at
+weekends — a different headway entirely. Every departure time this API serves is
+therefore a **weekday** time, presented without qualification.
+
+This one is not a one-line fix. Each block repeats the same stop ids in the same
+order, and `RouteSchedule.RouteStops` is a `Dictionary<int, RouteStop>` filled
+with `.Add()` — so simply switching to `.Elements(...)` would throw on the first
+duplicate key. Supporting day bands needs a model that keys schedules by
+(day band, stop) or hangs a list of timetables off each stop.
+
+### 5. Nearest-stop results are not sorted by distance
 
 `/BusStops` returns stops in stop-code order, so paging a distance-filtered
 query does not give you the nearest stops first. See
@@ -120,9 +146,6 @@ query does not give you the nearest stops first. See
 - **Import happens on first request**, inside a constructor, so the first caller
   pays the full parse cost and any data error surfaces as a 500 rather than a
   start-up failure.
-- **Only weekday schedules.** The importer reads a single
-  `<WeekdaySchedules>` block and ignores `FromDay` / `ToDay`, so there is no
-  notion of weekend or holiday timetables.
 - **The stale import path.** `appsettings.json` still points at
   `D:\Work\BusTable\SourceData\`, and no source data is committed.
 - **CI drift.** The workflow pins .NET 6 while the projects target .NET 7, and
@@ -140,18 +163,22 @@ query does not give you the nearest stops first. See
 
 Roughly in order of value per effort:
 
-1. **Fix the three defects above** and add tests that would have caught them —
+1. **Fix the defects above** and add tests that would have caught them —
    in particular an import test that starts from an empty stop registry.
 2. **Retarget to a supported framework** (.NET 8 LTS or later) and update the CI
    workflow to match.
-3. **Import both directions.** The `f0` files are already on disk; this is the
-   single largest gap between the data and the API.
+3. **Import both directions and all day bands.** The `f0` files and the weekend
+   blocks are already on disk; together they are the largest gap between the
+   data the project holds and the data it serves.
 4. **Sort geo results by distance**, and add a spatial index (grid or geohash
    buckets) so the search stops being an O(n) scan.
 5. **Move the import out of the constructor** into an explicit hosted service or
    start-up step, so failures are loud and the data can be reloaded.
-6. **Commit a small anonymized dataset** so the service runs out of the box —
-   the test snapshot is nearly enough already.
+6. **Commit a small dataset** so the service runs out of the box — the test
+   snapshot is nearly enough already. Refreshing it from the live source is also
+   still possible in principle: the TTC transit API identified in
+   [Data Sources](04-DataSources.md) still responds, though it now requires an
+   `X-Api-Key`.
 7. **Decide the fate of the UI.** It is a scaffold with one hardcoded fetch. It
    is either worth a real map view (stops around a point, route overlay) or
    worth deleting; keeping it as-is serves nobody.
